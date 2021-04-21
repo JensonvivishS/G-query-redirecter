@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">    
+    <title>E-Clone</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.jsdelivr.net/favicon.ico"/>
+</head>
+<body style="background: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=750&amp;q=80')no-repeat center center fixed;background-repeat: no-repeat;background-size: cover;">
+    <form class="row g-3" style="position: fixed; top: 50%; left: 50%; margin-top: -50px; margin-left: -100px;">
+        <div class="col-auto mx-auto">
+          <input type="search" class="form-control" id="query" placeholder="Search" style="overflow-x: auto; width: 150%;">
+        </div>
+        <div class="col-auto">
+            <button type="button" id="submit" class="btn btn-primary mb-3" style="margin-left: 145%;">Search</button>
+          </div>
+        <div class="col-auto">
+          <button type="button"class="btn btn-primary mb-3" style="margin-left: 85%; width: 130px;" id="speechToText">Voice Search</button>
+        </div>
+      </form>
+    <script>
+        var submit = document.getElementById("submit");
+        var speech = document.getElementById("speechToText");
+        var query = document.getElementById("query");
+        var searchEngineURL = "https://google.com/search?q="
+        submit.addEventListener("click", function(){
+            window.location.href = searchEngineURL + query.value
+        })
+        speech.addEventListener("click", function() {
+                // get output div reference
+		        var output = document.getElementById("output");
+		        // get action element reference
+		        var action = speech;
+                // new speech recognition object
+                var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+                var recognition = new SpeechRecognition();
+            
+                // This runs when the speech recognition service starts
+                recognition.onstart = function() {
+                    action.innerHTML = "<small>listening, please speak...</small>";
+                };
+                
+                recognition.onspeechend = function() {
+                    action.innerHTML = "Voice search";
+                    recognition.stop();
+                }
+              
+                // This runs when the speech recognition service returns result
+                recognition.onresult = function(event) {
+                    var transcript = event.results[0][0].transcript;
+                    query.value += transcript;
+                };
+              
+                 // start recognition
+                 recognition.start();
+        })
+    </script>
+</body>
+</html>
