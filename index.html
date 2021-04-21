@@ -14,10 +14,10 @@
           <input type="search" class="form-control" id="query" placeholder="Search" style="overflow-x: auto; width: 150%;">
         </div>
         <div class="col-auto">
-            <button type="button" id="submit" class="btn btn-primary mb-3" style="margin-left: 145%;">Search</button>
+            <button type="button" id="submit" class="btn btn-primary mb-3" style="margin-left: 340%;">Search</button>
           </div>
         <div class="col-auto">
-          <button type="button"class="btn btn-primary mb-3" style="margin-left: 85%; width: 130px;" id="speechToText">Voice Search</button>
+          <button type="button"class="btn btn-primary mb-3" style="margin-left: 10%; width: 130px;" id="speechToText">Voice Search</button>
         </div>
       </form>
     <script>
@@ -39,7 +39,7 @@
             
                 // This runs when the speech recognition service starts
                 recognition.onstart = function() {
-                    action.innerHTML = "<small>listening, please speak...</small>";
+                    action.innerHTML = "listening, please speak...";
                 };
                 
                 recognition.onspeechend = function() {
